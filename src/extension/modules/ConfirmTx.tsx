@@ -7,7 +7,6 @@ import { useThemeAnimation } from "data/settings/Theme"
 import { FlexColumn, Grid } from "components/layout"
 import { Form, FormError, FormItem, FormWarning } from "components/form"
 import { Input, Checkbox } from "components/form"
-import { useTx } from "txs/TxContext"
 import Overlay from "app/components/Overlay"
 import useToPostMultisigTx from "pages/multisig/utils/useToPostMultisigTx"
 import { isWallet, useAuth } from "auth"
@@ -30,7 +29,6 @@ const ConfirmTx = (props: TxRequest | SignBytesRequest) => {
   const { wallet, ...auth } = useAuth()
   const { actions } = useRequest()
   const passwordRequired = isWallet.single(wallet)
-  const { gasPrices } = useTx()
 
   /* form */
   const form = useForm<Values>({
@@ -69,20 +67,19 @@ const ConfirmTx = (props: TxRequest | SignBytesRequest) => {
 
     if ("tx" in props) {
       const { requestType, tx } = props
-      const txOptions = tx.fee ? tx : { ...tx, gasPrices, feeDenoms: ["uusd"] }
 
       try {
         if (disabled) throw new Error(disabled)
 
         if (isWallet.multisig(wallet)) {
-          const unsignedTx = await auth.create(txOptions)
+          const unsignedTx = await auth.create(tx)
           const { pathname, search } = toPostMultisigTx(unsignedTx)
           const openURL = getOpenURL([pathname, search].join("?"))
           actions.multisigTx(props)
           if (openURL) openURL()
           else navigate({ pathname, search })
         } else {
-          const result = await auth[requestType](txOptions, password)
+          const result = await auth[requestType](tx, password)
           const response = { result, success: true }
           actions.tx(requestType, props, response, nextPassword)
         }

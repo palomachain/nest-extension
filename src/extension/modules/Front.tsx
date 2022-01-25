@@ -1,5 +1,4 @@
 import { Col } from "components/layout"
-import TxContext from "txs/TxContext"
 import { useAuth } from "auth"
 import ExtensionPage from "../components/ExtensionPage"
 import SwitchWallet from "../auth/SwitchWallet"
@@ -31,11 +30,7 @@ const Front = () => {
   }
 
   if (tx) {
-    return (
-      <TxContext>
-        <ConfirmTx {...tx} />
-      </TxContext>
-    )
+    return <ConfirmTx {...tx} />
   }
 
   return <Assets />
