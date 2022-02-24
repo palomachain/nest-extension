@@ -19,6 +19,7 @@ import Header from "./layouts/Header"
 import Logo from "./layouts/Logo"
 import Settings from "./settings/Settings"
 import Front from "./modules/Front"
+import ScamAlert from "./modules/ScamAlert"
 
 const App = () => {
   const network = useNetwork()
@@ -45,6 +46,7 @@ const App = () => {
     { path: "/swap", element: <SwapTx /> },
     { path: "/multisig/sign", element: <SignMultisigTxPage /> },
     { path: "/multisig/post", element: <PostMultisigTxPage /> },
+    { path: "/scam", element: <ScamAlert /> },
 
     /* 404 */
     { path: "*", element: <Front /> },

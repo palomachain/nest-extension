@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "Terra Station Wallet",
-  "version": "2.5.1",
+  "version": "2.5.2",
   "background": {
     "scripts": ["background.js"],
     "persistent": true
@@ -21,7 +21,7 @@
   "options_ui": {
     "page": "index.html"
   },
-  "web_accessible_resources": ["inpage.js"],
+  "web_accessible_resources": ["inpage.js", "index.html"],
   "icons": {
     "128": "icon-128.png",
     "180": "icon-180.png"

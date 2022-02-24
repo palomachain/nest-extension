@@ -3,8 +3,28 @@ import PortStream from 'extension-port-stream'
 import LocalMessageDuplexStream from 'post-message-stream'
 
 if (shouldInjectProvider()) {
+  checkWebpage()
   injectScript()
   start()
+}
+
+/**
+ * Check if the current webpage is a known scam
+ *
+ */
+async function checkWebpage() {
+  const BLACKLIST_URL = "https://assets.terra.money/blacklist.json"
+  const WARNING_PAGE = `chrome-extension://${extension.runtime.id}/index.html#/scam`
+  const response = await fetch(BLACKLIST_URL)
+  const blacklist = await response.json()
+
+  // if user is visiting a blacklisted domain or subdomain
+  if (blacklist.some((url) => window.location.hostname.includes(url))) {
+    // and is not coming from the warning page
+    if (document.referrer.includes(extension.runtime.id)) return
+    // redirect to warning page
+    window.location.href = WARNING_PAGE
+  }
 }
 
 /**

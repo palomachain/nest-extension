@@ -1,0 +1,50 @@
+.page {
+  --danger: #ff5561;
+  --bg: #fff6f7;
+  --text: #111111;
+
+  background-color: var(--bg);
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
+
+  color: var(--text);
+  text-align: center;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  h1 {
+    color: var(--danger);
+    font-size: 28px;
+    font-weight: bold;
+    margin: 5px 70px;
+  }
+
+  p {
+    font-size: 16px;
+    margin: 10px 0 30px;
+    text-align: center;
+  }
+
+  a {
+    background-color: var(--bg);
+    border: 1px solid var(--danger);
+    border-radius: 30px;
+    color: var(--danger);
+    font-size: 14px;
+    font-weight: 500;
+    padding: 1rem 2rem;
+    text-decoration: none;
+  }
+
+  a:hover {
+    background-color: var(--danger);
+    color: var(--bg);
+  }
+}
