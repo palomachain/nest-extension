@@ -2,8 +2,10 @@ import { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { useNavigate } from "react-router-dom"
 import { useForm } from "react-hook-form"
+import WarningAmberIcon from "@mui/icons-material/WarningAmber"
 import { getErrorMessage } from "utils/error"
 import { useThemeAnimation } from "data/settings/Theme"
+import { Button } from "components/general"
 import { FlexColumn, Grid } from "components/layout"
 import { Form, FormError, FormItem, FormWarning } from "components/form"
 import { Input, Checkbox } from "components/form"
@@ -13,7 +15,7 @@ import useToPostMultisigTx from "pages/multisig/utils/useToPostMultisigTx"
 import { isWallet, useAuth } from "auth"
 import { PasswordError } from "auth/scripts/keystore"
 import { getOpenURL, getStoredPassword } from "../storage"
-import { getIsDangerousTx, SignBytesRequest, TxRequest } from "../utils"
+import { getIsTxGrant, SignBytesRequest, TxRequest } from "../utils"
 import { useRequest } from "../RequestContainer"
 import ExtensionPage from "../components/ExtensionPage"
 import WalletCard from "../components/WalletCard"
@@ -54,13 +56,7 @@ const ConfirmTx = (props: TxRequest | SignBytesRequest) => {
   /* submit */
   const [incorrect, setIncorrect] = useState<string>()
   const [submitting, setSubmitting] = useState(false)
-
-  const disabled =
-    "tx" in props && getIsDangerousTx(props.tx)
-      ? t("Dangerous tx")
-      : passwordRequired && !password
-      ? t("Enter password")
-      : ""
+  const disabled = passwordRequired && !password ? t("Enter password") : ""
 
   const navigate = useNavigate()
   const toPostMultisigTx = useToPostMultisigTx()
@@ -141,11 +137,31 @@ const ConfirmTx = (props: TxRequest | SignBytesRequest) => {
   const SIZE = { width: 100, height: 100 }
   const label = props.requestType === "post" ? t("Post") : t("Sign")
 
+  /* grant */
+  const isTxGrant = "tx" in props && getIsTxGrant(props.tx)
+  const [allowGrant, setAllowGrant] = useState(!isTxGrant)
+
   return submitting ? (
     <Overlay>
       <FlexColumn gap={20}>
         <img {...SIZE} src={animation} alt={t("Submitting...")} />
         {isWallet.ledger(wallet) && <p>{t("Confirm in ledger")}</p>}
+      </FlexColumn>
+    </Overlay>
+  ) : !allowGrant ? (
+    <Overlay>
+      <FlexColumn gap={20}>
+        <WarningAmberIcon className="danger" style={{ fontSize: 80 }} />
+
+        <h1>{t("Warning")}</h1>
+
+        <p>
+          {t("Neque porro quisquam est qui dolorem ipsum quia dolor sit amet")}
+        </p>
+
+        <Button onClick={() => setAllowGrant(true)} color="danger" size="small">
+          {t("Sign anyway")}
+        </Button>
       </FlexColumn>
     </Overlay>
   ) : (

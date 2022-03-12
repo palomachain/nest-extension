@@ -105,7 +105,7 @@ export const getIsNativeMsgFromExternal = (origin: string) => {
   }
 }
 
-export const getIsDangerousTx = ({ msgs }: CreateTxOptions) =>
+export const getIsTxGrant = ({ msgs }: CreateTxOptions) =>
   msgs.some((msg) => {
     const data = msg.toData()
     return data["@type"] === "/cosmos.authz.v1beta1.MsgGrant"
