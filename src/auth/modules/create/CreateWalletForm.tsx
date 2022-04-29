@@ -3,8 +3,8 @@ import { useTranslation } from "react-i18next"
 import { useForm } from "react-hook-form"
 import { Copy } from "components/general"
 import { Grid } from "components/layout"
-import { Form, FormItem, FormWarning, Submit } from "components/form"
-import { Checkbox, Input, TextArea } from "components/form"
+import { Form, FormItem, FormWarning, Submit, Value } from "components/form"
+import { Checkbox, Input } from "components/form"
 import validate from "../../scripts/validate"
 import { useCreateWallet, Values as DefaultValues } from "./CreateWalletWizard"
 
@@ -63,10 +63,14 @@ const CreateWalletForm = () => {
         extra={generated && <Copy text={mnemonic} />}
         error={errors.mnemonic?.message}
       >
-        <TextArea
-          {...register("mnemonic", { validate: validate.mnemonic })}
-          readOnly={generated}
-        />
+        {generated ? (
+          <Value>{mnemonic}</Value>
+        ) : (
+          <Input
+            type="password"
+            {...register("mnemonic", { validate: validate.mnemonic })}
+          />
+        )}
       </FormItem>
 
       {!generated && (
