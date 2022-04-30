@@ -1,7 +1,6 @@
 import { useEffect } from "react"
 import { useTranslation } from "react-i18next"
 import { useForm } from "react-hook-form"
-import { Copy } from "components/general"
 import { Grid } from "components/layout"
 import { Form, FormItem, FormWarning, Submit, Value } from "components/form"
 import { Checkbox, Input } from "components/form"
@@ -58,11 +57,7 @@ const CreateWalletForm = () => {
         />
       </FormItem>
 
-      <FormItem
-        label={t("Mnemonic")}
-        extra={generated && <Copy text={mnemonic} />}
-        error={errors.mnemonic?.message}
-      >
+      <FormItem label={t("Mnemonic")} error={errors.mnemonic?.message}>
         {generated ? (
           <Value>{mnemonic}</Value>
         ) : (
