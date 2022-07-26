@@ -1,4 +1,4 @@
-import { Proposal } from "@terra-money/terra.js"
+import { Proposal } from "@palomachain/paloma.js"
 import { FinderLink } from "components/general"
 import { Col, Card } from "components/layout"
 import { Read } from "components/token"

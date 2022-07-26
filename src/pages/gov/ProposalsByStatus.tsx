@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { useTranslation } from "react-i18next"
 import { reverse } from "ramda"
-import { Proposal } from "@terra-money/terra.js"
+import { Proposal } from "@palomachain/paloma.js"
 import { combineState, useIsClassic } from "data/query"
 import { useProposals, useProposalStatusItem } from "data/queries/gov"
 import { useTerraAssets } from "data/Terra/TerraAssets"

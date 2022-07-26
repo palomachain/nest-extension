@@ -1,4 +1,4 @@
-import { Coins } from "@terra-money/terra.js"
+import { Coins } from "@palomachain/paloma.js"
 import { isDenom, isDenomIBC } from "@terra.kitchen/utils"
 
 /* coin */

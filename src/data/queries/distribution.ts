@@ -1,6 +1,6 @@
 import { useQuery } from "react-query"
 import BigNumber from "bignumber.js"
-import { Coins, Rewards, ValAddress } from "@terra-money/terra.js"
+import { Coins, Rewards, ValAddress } from "@palomachain/paloma.js"
 import { has } from "utils/num"
 import { sortCoins } from "utils/coin"
 import { queryKey, RefetchOptions } from "../query"

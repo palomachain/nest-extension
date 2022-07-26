@@ -1,7 +1,7 @@
 import { useState } from "react"
 import classNames from "classnames/bind"
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown"
-import { Coins, Msg } from "@terra-money/terra.js"
+import { Coins, Msg } from "@palomachain/paloma.js"
 import { readMsg } from "@terra-money/msg-reader"
 import { useIsClassic } from "data/query"
 import TxMessage from "app/containers/TxMessage"
