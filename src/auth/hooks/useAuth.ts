@@ -4,7 +4,7 @@ import { encode } from "js-base64"
 import { CreateTxOptions, Tx, isTxError } from "@palomachain/paloma.js"
 import { AccAddress, SignDoc } from "@palomachain/paloma.js"
 import { MnemonicKey, RawKey, SignatureV2 } from "@palomachain/paloma.js"
-import { LedgerKey } from "@terra-money/ledger-terra-js"
+import { LedgerKey } from "@palomachain/ledger-paloma-js"
 import BluetoothTransport from "@ledgerhq/hw-transport-web-ble"
 import { LEDGER_TRANSPORT_TIMEOUT } from "config/constants"
 import { useChainID } from "data/wallet"
@@ -152,6 +152,7 @@ const useAuth = () => {
 
     if (is.ledger(wallet)) {
       const key = await getLedgerKey()
+      // @ts-ignore
       return await key.createSignatureAmino(doc, isClassic)
     } else {
       const pk = getKey(password)
