@@ -157,6 +157,7 @@ const useAuth = () => {
       const pk = getKey(password)
       if (!pk) throw new PasswordError("Incorrect password")
       const key = new RawKey(Buffer.from(pk, "hex"))
+      // @ts-ignore
       return await key.createSignatureAmino(doc, isClassic)
     }
   }
