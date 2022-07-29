@@ -13,9 +13,9 @@ import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline"
 import { isDenom, isDenomIBC, readDenom } from "@terra.kitchen/utils"
 import { Coin, Coins, LCDClient } from "@palomachain/paloma.js"
 import { CreateTxOptions, Fee } from "@palomachain/paloma.js"
-import { ConnectType, UserDenied } from "@terra-money/wallet-types"
-import { CreateTxFailed, TxFailed } from "@terra-money/wallet-types"
-import { useWallet, useConnectedWallet } from "@terra-money/use-wallet"
+import { ConnectType, UserDenied } from "@palomachain/wallet-types"
+import { CreateTxFailed, TxFailed } from "@palomachain/wallet-types"
+import { useWallet, useConnectedWallet } from "@palomachain/use-wallet"
 
 import { Contents } from "types/components"
 import { has } from "utils/num"
@@ -183,7 +183,7 @@ function Tx<TxValues>(props: Props<TxValues>) {
   useEffect(() => {
     if (process.env.NODE_ENV === "development" && failed) {
       console.groupCollapsed("Fee estimation failed")
-      console.info(simulationTx?.msgs.map((msg) => msg.toData(isClassic)))
+      console.info(simulationTx?.msgs.map((msg) => msg.toData()))
       console.info(failed)
       console.groupEnd()
     }
