@@ -58,14 +58,7 @@ const InstantiateContractForm = () => {
       const init_msg = parseJSON(msg)
       const coins = getCoins(values.coins)
       const msgs = [
-        new MsgInstantiateContract(
-          address,
-          admin,
-          code_id,
-          init_msg,
-          coins,
-          label || undefined
-        ),
+        new MsgInstantiateContract(address, admin, code_id, init_msg, coins),
       ]
 
       return { msgs }

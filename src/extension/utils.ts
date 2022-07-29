@@ -81,12 +81,12 @@ export const useParseTx = () => {
       const isProto = "@type" in JSON.parse(msgs[0])
       return isProto
         ? {
-            msgs: msgs.map((msg) => Msg.fromData(JSON.parse(msg), isClassic)),
+            msgs: msgs.map((msg) => Msg.fromData(JSON.parse(msg))),
             fee: fee ? Fee.fromData(JSON.parse(fee)) : undefined,
             memo,
           }
         : {
-            msgs: msgs.map((msg) => Msg.fromAmino(JSON.parse(msg), isClassic)),
+            msgs: msgs.map((msg) => Msg.fromAmino(JSON.parse(msg))),
             fee: fee ? Fee.fromAmino(JSON.parse(fee)) : undefined,
             memo,
           }
@@ -103,14 +103,14 @@ export const parseBytes = (
 }
 
 export const toData = (result: any, isClassic: boolean) => {
-  return result instanceof Tx ? result.toData(isClassic) : result
+  return result instanceof Tx ? result.toData() : result
 }
 
 /* helpers */
 export const getIsNativeMsgFromExternal = (origin: string) => {
   return (msg: Msg, isClassic: boolean) => {
     if (origin.includes("https://station.terra.money")) return false
-    const type = msg.toData(isClassic)["@type"]
+    const type = msg.toData()["@type"]
     return type !== "/terra.wasm.v1beta1.MsgExecuteContract"
   }
 }
@@ -120,6 +120,6 @@ export const getIsDangerousTx = (
   isClassic: boolean
 ) =>
   msgs.some((msg) => {
-    const data = msg.toData(isClassic)
+    const data = msg.toData()
     return data["@type"] === "/cosmos.authz.v1beta1.MsgGrant"
   })

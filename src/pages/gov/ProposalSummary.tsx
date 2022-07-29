@@ -7,7 +7,7 @@ import DataList from "./components/DataList"
 
 const ProposalSummary = ({ proposal }: { proposal: Proposal }) => {
   const isClassic = useIsClassic()
-  const contentData = proposal.content.toData(isClassic)
+  const contentData = proposal.content.toData()
   const details = Object.entries(contentData)
     .filter(([key]) => !["@type", "title", "description"].includes(key))
     .map(([key, content]) => ({

@@ -35,7 +35,7 @@ const ReadTx = (props: PropsWithChildren<{ tx: string }>) => {
       {
         title: t("Messages"),
         content: messages.map((message, index) => (
-          <Pre key={index}>{message.toData(isClassic)}</Pre>
+          <Pre key={index}>{message.toData()}</Pre>
         )),
       },
 

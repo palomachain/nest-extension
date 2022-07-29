@@ -163,6 +163,6 @@ export const useGetVoteOptionItem = () => {
 /* helpers */
 export const useParseProposalType = (content: Proposal.Content) => {
   const isClassic = useIsClassic()
-  const { "@type": type } = content.toData(isClassic)
+  const { "@type": type } = content.toData()
   return sentenceCase(last(type.split(".")) ?? "")
 }
